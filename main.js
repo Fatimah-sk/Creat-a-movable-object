@@ -7,6 +7,29 @@ let targetY = y;
 
 const speed = 0.1; // سرعة السلاسة
 
+// ▶️ دالة تمنع خروج الصاروخ من حدود الشاشة
+function keepInsideBounds() {
+  const rocketWidth = rocket.offsetWidth;
+  const rocketHeight = rocket.offsetHeight;
+
+  const halfW = rocketWidth / 2;
+  const halfH = rocketHeight / 2;
+
+  // اليسار
+  if (targetX < halfW) targetX = halfW;
+
+  // اليمين
+  if (targetX > window.innerWidth - halfW)
+    targetX = window.innerWidth - halfW;
+
+  // فوق
+  if (targetY < halfH) targetY = halfH;
+
+  // تحت
+  if (targetY > window.innerHeight - halfH)
+    targetY = window.innerHeight - halfH;
+}
+
 // تحديث الموقع كل لحظة
 function animate() {
   x += (targetX - x) * speed;
@@ -41,6 +64,8 @@ document.addEventListener("keydown", function(e) {
       targetX += step;
       break;
   }
+
+  keepInsideBounds(); // 🔥 إضافة مهمة
 });
 
 
@@ -49,4 +74,8 @@ document.addEventListener("keydown", function(e) {
 document.addEventListener("click", function(e) {
   targetX = e.clientX;
   targetY = e.clientY;
+  
+  keepInsideBounds(); // 🔥 إضافة مهمة
 });
+
+
