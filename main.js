@@ -1,76 +1,81 @@
-/*Javascript Advanced Oppgave 1: Create a movable object
-
-Opprette et Flyttbart Element
-Hei, JavaScript-entusiaster!
-
-I denne oppgaven skal vi utforske den praktiske siden av JavaScript ved å lage et flyttbart HTML-element. Oppgaven er å gjøre det mulig for elementet å bevege seg fritt rundt nettleservinduet. Spesifikasjonene er  som følger:
-
- 
-
-Funksjonalitet:
-Navigering med piltaster: Implementer muligheten til å flytte elementet i fire retninger – opp, ned, venstre og høyre – ved hjelp av piltastene.
-Klikk for å posisjonere: Tillat brukeren å flytte elementet direkte ved å klikke hvor som helst på siden.
-Forbli synlig: Sørg for at elementet holder seg innenfor den synlige skjermflaten.
-Implementeringstips:
-Bruk addEventListener() for å fange opp hendelser fra piltaster og museklikk.
-Bruk position: absolute for å gi elementet full bevegelsesfrihet.
- 
-
-Valgfrie utfordringer:
-Du kan forbedre implementeringen med følgende tillegg:
-
-Implementer kollisjonsdeteksjon eller legg til hindringer for ekstra kompleksitet.
-Styling:
-Selv om hovedfokuset er på funksjonalitet, kan du style elementet etter eget ønske. Denne oppgaven gjør seg godt i en portfolio så ta deg litt tid og gjør siden presentabel.
-
-Kort oppsumert: 
-Sett opp event listeners som fanger opp piltaster og museklikk.
-Implementer logikk for å oppdatere elementets posisjon basert på registrerte events.
-Legg eventuelt til ekstra funksjoner eller begrensninger for å gjøre oppgaven mer utfordrende.
-Husk, målet med denne øvelsen er å styrke din forståelse av event listeners  og manipulering av HTML-elementer ved hjelp av JavaScript.
-
-Husk at ryddig og velorganisert kode gjør det lettere å holde oversikt over alle komponentene! Hvis du trenger å bruke en løkke, bruk anledningen til å øve på de avanserte array-metodene vi har gått gjennom.
-
-Husk også å aktivere GitHub Pages for innleveringen din.
-
-Lykke til med kodeeventyret ditt! 🎉*/
-
 const rocket = document.getElementById("rocket");
 
 let x = window.innerWidth / 2;
 let y = window.innerHeight / 2;
+let targetX = x;
+let targetY = y;
 
-// تحريك الصاروخ بالأسهم
+const speed = 0.1; // سرعة السلاسة
+
+// ▶️ دالة تمنع خروج الصاروخ من حدود الشاشة
+function keepInsideBounds() {
+  const rocketWidth = rocket.offsetWidth;
+  const rocketHeight = rocket.offsetHeight;
+
+  const halfW = rocketWidth / 2;
+  const halfH = rocketHeight / 2;
+
+  // اليسار
+  if (targetX < halfW) targetX = halfW;
+
+  // اليمين
+  if (targetX > window.innerWidth - halfW)
+    targetX = window.innerWidth - halfW;
+
+  // فوق
+  if (targetY < halfH) targetY = halfH;
+
+  // تحت
+  if (targetY > window.innerHeight - halfH)
+    targetY = window.innerHeight - halfH;
+}
+
+// تحديث الموقع كل لحظة
+function animate() {
+  x += (targetX - x) * speed;
+  y += (targetY - y) * speed;
+
+  rocket.style.left = x + "px";
+  rocket.style.top = y + "px";
+
+  requestAnimationFrame(animate);
+}
+animate();
+
+
+// فحص الأسهم
 document.addEventListener("keydown", function(e) {
-  const step = 20; // مقدار الحركة
+  const step = 60;
 
   switch (e.key) {
     case "ArrowUp":
-      y -= step;
+      targetY -= step;
       break;
 
     case "ArrowDown":
-      y += step;
+      targetY += step;
       break;
 
     case "ArrowLeft":
-      x -= step;
+      targetX -= step;
       break;
 
     case "ArrowRight":
-      x += step;
+      targetX += step;
       break;
   }
 
-  rocket.style.left = x + "px";
-  rocket.style.top = y + "px";
+  keepInsideBounds(); // 🔥 إضافة مهمة
 });
 
-// تحريك الصاروخ بالنقر بالماوس
+
+
+// تحريك بالماوس
 document.addEventListener("click", function(e) {
-  x = e.clientX;
-  y = e.clientY;
-
-  rocket.style.left = x + "px";
-  rocket.style.top = y + "px";
+  targetX = e.clientX;
+  targetY = e.clientY;
+  
+  keepInsideBounds(); // 🔥 إضافة مهمة
 });
+
+
