@@ -5,9 +5,9 @@ let y = window.innerHeight / 2;
 let targetX = x;
 let targetY = y;
 
-const speed = 0.1; // سرعة السلاسة
+const speed = 0.1; //Smooth speed
 
-// ▶️ دالة تمنع خروج الصاروخ من حدود الشاشة
+//// hindrer raketten å forlate nettleserskjermens grenser.
 function keepInsideBounds() {
   const rocketWidth = rocket.offsetWidth;
   const rocketHeight = rocket.offsetHeight;
@@ -15,22 +15,22 @@ function keepInsideBounds() {
   const halfW = rocketWidth / 2;
   const halfH = rocketHeight / 2;
 
-  // اليسار
+  // left
   if (targetX < halfW) targetX = halfW;
 
-  // اليمين
+  // right
   if (targetX > window.innerWidth - halfW)
     targetX = window.innerWidth - halfW;
 
-  // فوق
+  // above
   if (targetY < halfH) targetY = halfH;
 
-  // تحت
+  // below
   if (targetY > window.innerHeight - halfH)
     targetY = window.innerHeight - halfH;
 }
 
-// تحديث الموقع كل لحظة
+//Nettstedet oppdateres hvert minutt
 function animate() {
   x += (targetX - x) * speed;
   y += (targetY - y) * speed;
@@ -43,7 +43,7 @@ function animate() {
 animate();
 
 
-// فحص الأسهم
+//checking keyboard arrows
 document.addEventListener("keydown", function(e) {
   const step = 60;
 
@@ -65,17 +65,17 @@ document.addEventListener("keydown", function(e) {
       break;
   }
 
-  keepInsideBounds(); // 🔥 إضافة مهمة
+  keepInsideBounds(); 
 });
 
 
 
-// تحريك بالماوس
+// Mouse click
 document.addEventListener("click", function(e) {
   targetX = e.clientX;
   targetY = e.clientY;
   
-  keepInsideBounds(); // 🔥 إضافة مهمة
+  keepInsideBounds();
 });
 
 
