@@ -12,9 +12,98 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 10;
 }
 
 #rocket img {
   width: 120px;
-  filter: drop-shadow(0 0 20px #000);
+  filter: drop-shadow(0 0 25px #000);
+}
+
+
+
+
+.asteroid {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-image: url(images/asteroid.png);
+  background-size: cover;
+  background-position: center;
+  z-index: 5;
+}
+
+.a1 {
+  top: 130px;
+  left: 200px;
+}
+
+.a2 {
+  top: 50px;
+  right: 250px;
+}
+
+.a3 {
+  bottom: 50px;
+  left: 60%;
+}
+
+
+
+#gameOver {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+#gameOver.hidden {
+  display: none;
+}
+
+#gameOver .box {
+  background: #222;
+  padding: 30px 40px;
+  border-radius: 10px;
+  text-align: center;
+  color: white;
+  font-family: sans-serif;
+  box-shadow: 0 0 200px #a82727;
+}
+
+#gameOver button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  background: #ff5500;
+  color: white;
+  cursor: pointer;
+}
+
+#gameOver button:hover {
+  background: #ad3719;
+}
+
+#explosionImg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  pointer-events: none; 
+  z-index: 20;
+}
+
+.hidden {
+  display: none;
 }
