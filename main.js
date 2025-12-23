@@ -113,14 +113,18 @@ document.addEventListener("keydown", function (e) {
   switch (e.key) {
     case "ArrowUp":
       targetY -= step;
+      targetY -= step;
       break;
     case "ArrowDown":
+      targetY += step;
       targetY += step;
       break;
     case "ArrowLeft":
       targetX -= step;
+      targetX -= step;
       break;
     case "ArrowRight":
+      targetX += step;
       targetX += step;
       break;
   }
