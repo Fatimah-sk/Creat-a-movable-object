@@ -10,7 +10,23 @@
 <body>
   <div id="rocket">
     <img src="images/rocket.png" alt="Rocket">
+    <img src="images/explosion.png" alt="explosion" class="hidden" id="explosionImg">
   </div>
+
+<div class="asteroid a1"></div>
+<div class="asteroid a2"></div>
+<div class="asteroid a3"></div>
+
+<audio id="explosionSound" src="sound/explosion.mp3"></audio>
+
+<div id="gameOver" class="hidden">
+  <div class="box">
+    <h2>Explosion!💥</h2>
+    <p> You crashed into the space rock.</p>
+    <button id="restartBtn">Try again</button>
+  </div>
+</div>
+
 
 </body>
 </html>
