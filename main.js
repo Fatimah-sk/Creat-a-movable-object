@@ -54,10 +54,10 @@ function checkCollision() {
 
     const distance = Math.sqrt(dx * dx + dy * dy);
 
-    // نصف قطر الحجر (تقريباً)
+// Omtrentlig radius på steinen
     const asteroidRadius = aRect.width / 2;
 
-    // لو مركز الصاروخ صار جوّا "دائرة" الحجر → اصطدام
+// Hvis sentrum av raketten havner inni «sirkelen» til steinen → kollisjon
     if (distance < asteroidRadius) {
       handleCrash();
       break;
@@ -70,23 +70,22 @@ function handleCrash() {
 
   crashed = true;
 
-  // شغّل صوت الانفجار
+// Spill av eksplosjonslyden
   explosionSound.currentTime = 0;
   explosionSound.play();
 
-  // أظهر صورة الانفجار فوق الصاروخ
+// Vis eksplosjonsbildet over raketten
   const exploimg = document.getElementById("explosionImg");
   exploimg.classList.remove("hidden");
 
-  // إظهار شاشة "Try Again"
+  // Vis "Try Again"-skjermen
   const GameOver=document.getElementById("gameOver");
   GameOver.classList.remove("hidden");
 }
 
 
 
-
-// حلقة الأنيميشن (الحركة السلسة)
+// Animasjonsløkke (jevn bevegelse)
 function animate() {
   if (!crashed) {
     x += (targetX - x) * speed;
@@ -104,9 +103,9 @@ function animate() {
 animate();
 
 
-// تحريك بالأسهم
+// Bevegelse med piltasteknappene
 document.addEventListener("keydown", function (e) {
-  if (crashed) return; // لو صار اصطدام، لا نستجيب للأزرار
+  if (crashed) return; // hvis det har skjedd en kollisjon, ignorer tastetrykk
 
   const step = 60;
 
@@ -133,9 +132,9 @@ document.addEventListener("keydown", function (e) {
 });
 
 
-// تحريك بالماوس
+// Bevegelse med musen
 document.addEventListener("click", function (e) {
-  if (crashed) return; // لو صار اصطدام، لا تستجيب للنقر
+  if (crashed) return; // hvis det har skjedd en kollisjon, ignorer klikk
 
   targetX = e.clientX;
   targetY = e.clientY;
@@ -151,7 +150,7 @@ const gameOverScreen = document.getElementById("gameOver");
 restartBtn.addEventListener("click", () => {
   crashed = false;
 
-  // رجعي الصاروخ للنص
+  // Sett raketten tilbake til midten av skjermen
   x = window.innerWidth / 2;
   y = window.innerHeight / 2;
   targetX = x;
@@ -160,10 +159,10 @@ restartBtn.addEventListener("click", () => {
   rocket.style.left = x + "px";
   rocket.style.top = y + "px";
 
-  // إخفاء رسالة Game Over
+  // Skjul "Game Over"-skjermen
   gameOverScreen.classList.add("hidden");
 
-  // إخفاء صورة الانفجار
+  // Skjul eksplosjonsbildet
   document.getElementById("explosionImg").classList.add("hidden");
 });
 
